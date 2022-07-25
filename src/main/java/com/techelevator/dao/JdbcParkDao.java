@@ -13,12 +13,24 @@ public class JdbcParkDao implements ParkDao {
     private JdbcTemplate jdbcTemplate;
 
     public JdbcParkDao(DataSource dataSource) {
+
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public List<Park> getAllParks() {
-        return new ArrayList<>();
+        String sql =
+                "SELECT * " +
+                 "FROM park " +
+                 "ORDER BY location;";
+        List<Park> parks = new ArrayList<>();
+
+        SqlRowSet output = jdbcTemplate.queryForRowSet(sql);
+
+        while (output.next()) {
+            parks.add(mapRowToPark(output));
+        }
+        return parks;
     }
 
     private Park mapRowToPark(SqlRowSet results) {

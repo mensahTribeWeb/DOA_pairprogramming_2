@@ -21,13 +21,17 @@ public class JdbcSiteDaoTests extends BaseDaoTests {
     public void getSitesThatAllowRVs_Should_ReturnSites() {
         List<Site> sites = dao.getSitesThatAllowRVs(1);
 
-        assertEquals(2,sites.size());
+        assertEquals(2, sites.size());
     }
 
+    @Test
     public void getAvailableSites_Should_ReturnSites() {
+        List<Site> sites = dao.getAvailableSites(1);
+
+        assertEquals(2, sites.size());
 
     }
-
+    @Test
     public void getAvailableSitesDateRange_Should_ReturnSites() {
 
     }
